@@ -1,0 +1,1 @@
+..\3rdparty\linqtoxsd\LinqToXsd.exe /nameMangler2 /fileName:Generated\linq2xsd.cs ..\FilesExtraction\xsd\release-notification.xsd

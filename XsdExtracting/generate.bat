@@ -1,0 +1,1 @@
+"c:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bin\xsd.exe" /namespace:XsdExtracting.Generated /out:Generated /c ..\FilesExtraction\xsd\ddex.xsd ..\FilesExtraction\xsd\ddexC.xsd ..\FilesExtraction\xsd\iso3166a2.xsd ..\FilesExtraction\xsd\iso4217a.xsd ..\FilesExtraction\xsd\iso639a2.xsd ..\FilesExtraction\xsd\release-notification.xsd

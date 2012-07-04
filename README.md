@@ -10,7 +10,13 @@ The FilesExtractor app deserializes the same xml using following approaches:
 * XsdToObject (http://github.com/7digital/XsdToObject) to map XSD to classes and XDocument to load xml
 
 The FilesExtractor shows statistics of:
-* module initialization time
 * xml load time
-* data accessing time (this is an average of 10 attempts to read data)
+* total data accessing time
 * total time
+
+The statistics are taken for:
+1 data access
+1 data access (to show difference between framework initalization and normal usage)
+100 data accesses
+1000 data accesses
+10000 data accesses

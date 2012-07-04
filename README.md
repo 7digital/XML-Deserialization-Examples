@@ -15,8 +15,8 @@ The FilesExtractor shows statistics of:
 * total time
 
 The statistics are taken for:
-1 data access
-1 data access (to show difference between framework initalization and normal usage)
-100 data accesses
-1000 data accesses
-10000 data accesses
+* 1 data access
+* 1 data access (to show difference between framework initalization and normal usage)
+* 100 data accesses
+* 1000 data accesses
+* 10000 data accesses

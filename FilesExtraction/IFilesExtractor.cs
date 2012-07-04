@@ -4,7 +4,6 @@ namespace FilesExtraction
 {
     public interface IFilesExtractor
     {
-        void Initialize();
         void LoadFile(string xmlFilePath);
         IEnumerable<FileDetails> ExtractSoundRecordings();
         string Description { get; }

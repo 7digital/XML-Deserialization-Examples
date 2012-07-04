@@ -10,18 +10,13 @@ namespace XsdExtracting
 {
     public class XsdExtractor : IFilesExtractor
     {
-        private XmlSerializer _serializer;
         private NewReleaseMessage _msg;
-
-        public void Initialize()
-        {
-            _serializer = new XmlSerializer(typeof(NewReleaseMessage));
-        }
 
         public void LoadFile(string xmlFilePath)
         {
+            XmlSerializer serializer = new XmlSerializer(typeof(NewReleaseMessage));
             using (Stream stream = new FileStream(xmlFilePath, FileMode.Open, FileAccess.Read))
-                _msg = (NewReleaseMessage)_serializer.Deserialize(stream);
+                _msg = (NewReleaseMessage)serializer.Deserialize(stream);
         }
 
         public IEnumerable<FileDetails> ExtractSoundRecordings()

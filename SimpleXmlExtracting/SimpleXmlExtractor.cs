@@ -10,10 +10,6 @@ namespace SimpleXmlExtracting
     {
         private dynamic _xml;
         
-        public void Initialize()
-        {
-        }
-
         public void LoadFile(string xmlFilePath)
         {
             _xml = File.ReadAllText(xmlFilePath).AsSimpleXml();

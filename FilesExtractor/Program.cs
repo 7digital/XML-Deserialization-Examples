@@ -12,29 +12,35 @@ namespace FilesExtractor
 {
     public class Program
     {
+        private static IList<IFilesExtractor> extractors = new List<IFilesExtractor>
+        {
+            new XsdExtractor(),
+            new XElementExtractor(),
+            new SimpleXmlExtractor(),
+            new LinqToXsdExtractor(),
+            new XsdToObjectsExtractor()
+        };
+
         public static void Main()
         {
-            IList<IFilesExtractor> extractors = new List<IFilesExtractor>
-            {                
-                new XsdExtractor(),
-                new XElementExtractor(),
-                new SimpleXmlExtractor(),
-                new LinqToXsdExtractor(),                
-                new XsdToObjectsExtractor()
-            };
+            for (int i = 0; i < extractors.Count; ++i)
+                Console.WriteLine("{0}={1} - {2}", i + 1, extractors[i].GetType().Name, extractors[i].Description);
 
-            foreach (IFilesExtractor extractor in extractors)
-                Console.WriteLine("{0}: {1}", extractor.GetType().Name, extractor.Description);
+            RunExtractors(1);
+            RunExtractors(1);
+            RunExtractors(100);
+            RunExtractors(1000);
+            RunExtractors(10000);
 
-            Console.WriteLine("\nRunning extractors...");
-
-            int namePadding = extractors.Select(filesExtractor => filesExtractor.GetType().Name.Length).Concat(new[] {0}).Max();
-
-            foreach (IFilesExtractor extractor in extractors)
-                Extract(extractor,namePadding);
-
-            Console.WriteLine("Done.");
+            Console.WriteLine("\nDone.");
             Console.ReadKey();
+        }
+
+        private static void RunExtractors(int reads)
+        {
+            Console.WriteLine("\nRunning extractors - {0} read(s)...", reads);
+            for (int i = 0; i < extractors.Count; ++i)
+                Extract(extractors[i], i + 1, reads);
         }
 
         private static double Measure(Action action)
@@ -50,21 +56,19 @@ namespace FilesExtractor
             double total = 0;
             for (int i = 0; i < count; i++)
                 total += Measure(action);
-            return total / count;
+            return total;
         }
 
-        public static void Extract(IFilesExtractor extractor, int namePadding)
+        public static void Extract(IFilesExtractor extractor, int idx, int reads)
         {
             try
             {
-                double initTime = Measure(extractor.Initialize);
                 double loadTime = Measure(() => extractor.LoadFile("ddexTest.xml"));
-                double accessTime = MeasureAvg(() => extractor.ExtractSoundRecordings(), 100);
+                double accessTime = MeasureAvg(() => extractor.ExtractSoundRecordings(), reads);
 
-                Console.WriteLine("{0}: Init:{1,5:0.0}ms Load:{2,5:0.0}ms Access:{3,5:0.0}ms Total:{4,6:0.0}ms",
-                    extractor.GetType().Name.PadLeft(namePadding),
-                    initTime, loadTime, accessTime, 
-                    initTime + loadTime + accessTime);
+                Console.WriteLine("{0}: Load: {1,6:0.0}ms, Access: {2,5:0.0}ms, Total: {3,6:0.0}ms",
+                    idx, loadTime, accessTime,
+                    loadTime + accessTime);
 
             }
             catch (Exception e)

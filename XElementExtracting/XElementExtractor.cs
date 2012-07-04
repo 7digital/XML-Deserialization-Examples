@@ -9,13 +9,9 @@ namespace XElementExtracting
     {
         private XDocument _doc;
 
-        public void Initialize()
-        {            
-        }
-
         public void LoadFile(string xmlFilePath)
         {
-            _doc=XDocument.Load(xmlFilePath);
+            _doc = XDocument.Load(xmlFilePath);
         }
 
         public IEnumerable<FileDetails> ExtractSoundRecordings()

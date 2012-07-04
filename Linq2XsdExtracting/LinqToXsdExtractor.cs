@@ -9,11 +9,6 @@ namespace Linq2XsdExtracting
     {
         private NewReleaseMessage _doc;
 
-        public void Initialize()
-        {
-            
-        }
-
         public void LoadFile(string xmlFilePath)
         {
             _doc = NewReleaseMessage.Load(xmlFilePath);

@@ -6,13 +6,9 @@ using XsdToObjectsExtracting.Generated;
 
 namespace XsdToObjectsExtracting
 {
-    public class XsdToObjectsExtractor:IFilesExtractor
+    public class XsdToObjectsExtractor : IFilesExtractor
     {
         private NewReleaseMessage _msg;
-
-        public void Initialize()
-        {            
-        }
 
         public void LoadFile(string xmlFilePath)
         {

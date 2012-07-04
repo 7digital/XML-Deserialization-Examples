@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using FilesExtraction;
 using Linq2XsdExtracting;
 using SimpleXmlExtracting;
@@ -27,8 +28,10 @@ namespace FilesExtractor
 
             Console.WriteLine("\nRunning extractors...");
 
+            int namePadding = extractors.Select(filesExtractor => filesExtractor.GetType().Name.Length).Concat(new[] {0}).Max();
+
             foreach (IFilesExtractor extractor in extractors)
-                Extract(extractor);
+                Extract(extractor,namePadding);
 
             Console.WriteLine("Done.");
             Console.ReadKey();
@@ -50,7 +53,7 @@ namespace FilesExtractor
             return total / count;
         }
 
-        public static void Extract(IFilesExtractor extractor)
+        public static void Extract(IFilesExtractor extractor, int namePadding)
         {
             try
             {
@@ -58,8 +61,8 @@ namespace FilesExtractor
                 double loadTime = Measure(() => extractor.LoadFile("ddexTest.xml"));
                 double accessTime = MeasureAvg(() => extractor.ExtractSoundRecordings(), 100);
 
-                Console.WriteLine("{0}: Init:{1:0.0}ms, Load:{2:0.0}ms, Access:{3:0.0}ms, Total:{4:0.0}ms",
-                    extractor.GetType().Name,
+                Console.WriteLine("{0}: Init:{1,5:0.0}ms Load:{2,5:0.0}ms Access:{3,5:0.0}ms Total:{4,6:0.0}ms",
+                    extractor.GetType().Name.PadLeft(namePadding),
                     initTime, loadTime, accessTime, 
                     initTime + loadTime + accessTime);
 

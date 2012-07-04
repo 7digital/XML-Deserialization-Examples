@@ -32,7 +32,7 @@ namespace SimpleXmlExtracting
 
         public string Description
         {
-            get { return "SimpleXml - https://bitbucket.org/paulshannon/simplexml"; }
+            get { return "SimpleXml - http://bitbucket.org/paulshannon/simplexml"; }
         }
     }
 }

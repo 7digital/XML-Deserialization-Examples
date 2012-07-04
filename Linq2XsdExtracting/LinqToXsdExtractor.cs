@@ -33,7 +33,7 @@ namespace Linq2XsdExtracting
 
         public string Description
         {
-            get { return "Using LINQ to XSD - http://linqtoxsd.codeplex.com/"; }
+            get { return "LINQ to XSD - http://linqtoxsd.codeplex.com"; }
         }
     }
 }
